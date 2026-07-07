@@ -1,16 +1,17 @@
 include ../../rules.mak
 
 srcdir	=	$(relicbase)/rb/lib/$(target)
+rtdir	=	$(relicbase)/rb/lib
 
 target	= 6309
 vpath %.as	$(srcdir)
 
 %.a: %.as
-	lwasm --format=obj --pragma=pcaspcr,nosymbolcase,condundefzero,undefextern,dollarnotlocal,noforwardrefmax $< --output=$@
+	lwasm --format=obj --pragma=pcaspcr,nosymbolcase,condundefzero,undefextern,dollarnotlocal,noforwardrefmax,export $< --output=$@
 
 TARGETLIB	= $(relicbase)/rb/lib/$(target)/librb.a
 TARGETZIP	= $(relicbase)/rb/lib/$(target)/librb.zip
-TARGETRT	= $(relicbase)/rb/lib/$(target)/rbstart.a
+TARGETRT	= $(relicbase)/rb/lib/$(target)/rbstart.o
 
 MATH	= add.a assign.a subtract.a multiply.a divide.a
 MATHS	= add.as assign.as subtract.as multiply.as divide.as
@@ -20,7 +21,7 @@ IO	= printboolean.a printbyte.a printstring.a printinteger.a printreal.a \
 IOS	= printboolean.as printbyte.as printstring.as printinteger.as printreal.as \
 	printcr.as peek.as poke.as inputboolean.as inputbyte.as inputstring.as inputinteger.as \
 	inputreal.as iocommon.as
-STR	= addstring.a copystring.a 
+STR	= addstring.a copystring.a
 STRS	= addstring.as copystring.as
 MISC	= compare.a negreal.a
 MISCS	= compare.as negreal.as
@@ -32,7 +33,8 @@ SRCS	= $(MATHS) $(IOS) $(STRS) $(MISCS) $(SYSS)
 
 all:	$(TARGETRT) $(TARGETLIB) $(TARGETZIP)
 
-$(TARGETRT): rbstart.as
+$(TARGETRT): $(rtdir)/rbstart.a
+	lwasm --format=obj --pragma=pcaspcr,nosymbolcase,condundefzero,undefextern,dollarnotlocal,noforwardrefmax,export $(rtdir)/rbstart.a --output=$(TARGETRT)
 
 $(TARGETLIB): $(OBJS)
 	lwar -c $(TARGETLIB) $(OBJS)

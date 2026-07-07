@@ -7,11 +7,11 @@ inputbuff     rmb     8
 * Input an Integer
 *
 * Entry:
-*   inputinteger_p0,u - path
-*   inputinteger_p1,u - area where integer will be stored
+*   inputinteger.p0,u - path
+*   inputinteger.p1,u - area where integer will be stored
 inputinteger
 inputinteger export
-              lda     inputinteger_p0,u
+              lda     inputinteger.p0,u
               leax    inputbuff,u
               ldy     #7
               lbsr    FGETS
@@ -20,7 +20,7 @@ inputinteger export
               lbsr    RedoInput
               bra     inputinteger
 inputexit     
-              std     inputinteger_p1,u
+              std     inputinteger.p1,u
               rts
 
               endsect

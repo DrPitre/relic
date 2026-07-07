@@ -8,7 +8,7 @@ carret        fcb     $0D
 *   A = path to write
 printcr
 printcr export
-              lda     printcr_p0,u
+              lda     printcr.p0,u
               lbra    FPUTCR
 
               endsect

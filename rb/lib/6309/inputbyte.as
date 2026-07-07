@@ -6,11 +6,11 @@ inputbuff     rmb     8
 * Input a Byte
 *
 * Entry:
-*   inputbyte_p0,u - path
-*   inputbyte_p1,u - area where byte will be stored
+*   inputbyte.p0,u - path
+*   inputbyte.p1,u - area where byte will be stored
 inputbyte 
 inputbyte  export
-              lda     inputbyte_p0,u
+              lda     inputbyte.p0,u
               leax    inputbuff,u
               ldy     #4
               lbsr    FGETS
@@ -19,7 +19,7 @@ inputbyte  export
               lbsr    RedoInput
               bra     inputbyte
 inputexit     
-              stb     inputbyte_p1,u
+              stb     inputbyte.p1,u
               rts
 
               endsect

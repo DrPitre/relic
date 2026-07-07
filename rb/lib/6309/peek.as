@@ -4,7 +4,7 @@
 peek
 peek export
               pshs   x
-              ldx    peek_p0,u
+              ldx    peek.p0,u
               lda    ,x
               sta    peek_r0,u
               puls   x,pc

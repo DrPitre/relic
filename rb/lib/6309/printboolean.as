@@ -7,8 +7,8 @@
 *   B = boolean vale
 printboolean
 printboolean export
-              lda     printboolean_p0,u
-              tst     printboolean_p1,u
+              lda     printboolean.p0,u
+              tst     printboolean.p1,u
               beq     printfalse
               leax    _true,pcr
               bra     write

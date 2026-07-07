@@ -5,6 +5,11 @@
 .gdb_history
 /rb/lib/rbstart.r
 /build/unix/rblib/*.r
+/build/unix/rblib/*/*.a
+/build/unix/rblib/*/*.zip
+/rb/lib/*/librb.a
+/rb/lib/*/librb.zip
+/rb/lib/*/rbstart.o
 
 # compiled tool binaries
 /relic/relic

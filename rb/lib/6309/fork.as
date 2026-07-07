@@ -7,7 +7,7 @@ _fork
 _fork export
               pshs     u
               leax     parmarea,u
-              leay     shell_p0,u
+              leay     shell.p0,u
 * skip over command
 n             lda      ,y+
               beq      done
@@ -24,7 +24,7 @@ l             sta      ,x+
               bne      l
 done          lda      #$0D
               sta      ,x
-              leax     shell_p0,u
+              leax     shell.p0,u
               leau     parmarea,u
               ldd      #$0004
               ldy      #256

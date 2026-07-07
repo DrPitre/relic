@@ -16,11 +16,11 @@ FalseNumber   fcc     /0/
 * Input a Byte
 *
 * Entry:
-*   inputboolean_p0,u - path
-*   inputboolean_p1,u - area where boolean value will be stored
+*   inputboolean.p0,u - path
+*   inputboolean.p1,u - area where boolean value will be stored
 inputboolean 
 inputboolean  export
-              lda     inputboolean_p0,u
+              lda     inputboolean.p0,u
               leax    inputbuff,u
               ldy     #6
               lbsr    FGETS_NOCR
@@ -41,9 +41,9 @@ inputboolean  export
               bsr     RedoInputBoolean
               bra     inputboolean
 ItsTrue       lda     #1
-              sta     inputboolean_p1,u
+              sta     inputboolean.p1,u
               rts
-ItsFalse      clr     inputboolean_p1,u
+ItsFalse      clr     inputboolean.p1,u
               rts
 
 RedoInputBoolean

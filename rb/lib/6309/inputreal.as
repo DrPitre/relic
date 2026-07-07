@@ -7,11 +7,11 @@ inputbuff     rmb     24
 * Input a Real
 *
 * Entry:
-*   inputreal_p0,u - path
-*   inputreal_p1,u - area where Real will be stored
+*   inputreal.p0,u - path
+*   inputreal.p1,u - area where Real will be stored
 inputreal 
 inputreal  export
-              lda     inputreal_p0,u
+              lda     inputreal.p0,u
               leax    inputbuff,u
               ldy     #7
               os9     I$ReadLn
@@ -21,7 +21,7 @@ inputreal  export
               lbsr    RedoInput
               bra     inputreal
 inputexit     
-              std     inputreal_p1,u
+              std     inputreal.p1,u
               rts
 
               endsect

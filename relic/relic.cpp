@@ -172,7 +172,7 @@ int back_end(struct module_params *p)
 int assembler(struct module_params *p)
 {
 	sprintf(p->outfile, "%s/%s.r", p->outputdir, filenameWithoutExtension(p->infile));
-	sprintf(p->exec, "%s --format=obj --output=%s %s", AS, p->outfile, p->infile);
+	sprintf(p->exec, "%s --format=obj --pragma=pcaspcr,nosymbolcase,condundefzero,undefextern,dollarnotlocal,noforwardrefmax,export --output=%s %s", AS, p->outfile, p->infile);
 
 	int status = exec(p);
 
@@ -188,7 +188,7 @@ int assembler(struct module_params *p)
 int linker(struct module_params *p)
 {
 	sprintf(p->outfile, "%s/%s", p->outputdir, filenameWithoutExtension(p->infile));
-	sprintf(p->exec, "%s --format=os9 --output=%s --entry=_start %s/rbstart.o %s -lrblib -lalib -lsys -L%s",
+	sprintf(p->exec, "%s --format=os9 --output=%s --entry=_start %s/rbstart.o %s -lrb -lalib -lnos96309l2 -L%s",
 		LN, p->outfile, p->libdir, p->infile, p->libdir);
 
 	int status = exec(p);
