@@ -11,6 +11,9 @@
 /rb/lib/*/librb.zip
 /rb/lib/*/rbstart.o
 /emu/*.dsk
+*.o.map
+*.o.list
+/build/unix/rxopt/*.ro
 
 # compiled tool binaries
 /relic/relic
