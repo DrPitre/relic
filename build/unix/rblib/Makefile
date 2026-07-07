@@ -1,4 +1,4 @@
-DIRS	= 6309 ppc cell
+DIRS	= 6309 ppc cell arm64
 
 all:
 	$(foreach dir, $(DIRS), (cd $(dir); make);)

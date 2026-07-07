@@ -213,6 +213,22 @@ public class Compiler extends RelicObject
 		return 0;
 	}
 	
+	static int execBackEndARM64(String infile, String outfile, String target) throws Exception
+	{
+		if (!quietMode) { System.out.println("BackEndARM64 -t=" + target + " " + infile + " " + outfile); }
+		if (!dryRun)
+		{
+			BackEndARM64 be = new BackEndARM64();
+			if (be.process(target, infile, outfile) != 0)
+			{
+				System.err.println("error: backend failed to process " + infile);
+				return 1;
+			}
+		}
+
+		return 0;
+	}
+
 	static int execAssembler6309(String infile, String outfile) throws Exception
 	{
 		// Invoke the assembler
@@ -290,7 +306,7 @@ public class Compiler extends RelicObject
 		{
 			postOpts = "";
 		}
-		
+
 		String command = "ld -arch ppc " + preOpts + " " + infile + " -o " + outfile + " " + postOpts;
 		if (!quietMode)
 		{
@@ -300,10 +316,60 @@ public class Compiler extends RelicObject
 		{
 			return Execute(command);
 		}
-      
+
 		return 0;
 	}
-   
+
+	static int execAssemblerARM64(String infile, String outfile) throws Exception
+	{
+		String command = "as -g -arch arm64 " + infile + " -o " + outfile;
+		if (!quietMode)
+		{
+			System.out.println(command);
+		}
+		if (!dryRun)
+		{
+			return Execute(command);
+		}
+
+		return 0;
+	}
+
+	static int execLinkerARM64(String infile, String outfile, String preOpts, String postOpts) throws Exception
+	{
+		if (preOpts == null)
+		{
+			preOpts = "";
+		}
+		if (postOpts == null)
+		{
+			postOpts = "";
+		}
+
+		String sdkPath = getMacOSXSDKPath();
+		String command = "ld -arch arm64 -platform_version macos 11.0 11.0 -syslibroot " + sdkPath + " -lSystem -e _start "
+			+ preOpts + " " + infile + " -o " + outfile + " " + postOpts;
+		if (!quietMode)
+		{
+			System.out.println(command);
+		}
+		if (!dryRun)
+		{
+			return Execute(command);
+		}
+
+		return 0;
+	}
+
+	static String getMacOSXSDKPath() throws Exception
+	{
+		Process proc = Runtime.getRuntime().exec(new String[] { "xcrun", "-sdk", "macosx", "--show-sdk-path" });
+		BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+		String path = reader.readLine();
+		proc.waitFor();
+		return path;
+	}
+
 	public static int process(String[] args) throws Exception
 	{
 		System.out.println("RELIC compiler v" + version + " - (C) 2009 Boisy G. Pitre");
@@ -394,6 +460,28 @@ public class Compiler extends RelicObject
 											pathToLibrary(libraryPath, "rbstart.o"),
 											" -L" + libraryPath.get(0) + " -lrelic",
 											target) == 0)
+										 {
+										 }
+									 }
+								 }
+							 }
+						 }
+					 }
+                     else if (target.equals("arm64"))
+                     {
+						 if (execBackEndARM64(beInFile, destFile + ".s", target) == 0)
+						 {
+							 if (exitAfterBackEnd == false)
+							 {
+								 if (execAssemblerARM64(destFile + ".s", destFile + ".o") == 0)
+								 {
+									 if (exitAfterAssembler == false)
+									 {
+										 if (execLinkerARM64(
+											destFile + ".o",
+											destFile,
+											pathToLibrary(libraryPath, "rbstart.o"),
+											" -L" + libraryPath.get(0) + " -lrelic") == 0)
 										 {
 										 }
 									 }
