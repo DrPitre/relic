@@ -187,7 +187,14 @@ int assembler(struct module_params *p)
 
 int linker(struct module_params *p)
 {
-	sprintf(p->outfile, "%s/%s", p->outputdir, filenameWithoutExtension(p->infile));
+	if (strcmp(p->outputdir, ".") == 0)
+	{
+		sprintf(p->outfile, "%s", filenameWithoutExtension(p->infile));
+	}
+	else
+	{
+		sprintf(p->outfile, "%s/%s", p->outputdir, filenameWithoutExtension(p->infile));
+	}
 	sprintf(p->exec, "%s --format=os9 --output=%s --entry=_start %s/rbstart.o %s -lrb -lalib -lnos96309l2 -L%s",
 		LN, p->outfile, p->libdir, p->infile, p->libdir);
 
