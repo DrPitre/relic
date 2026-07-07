@@ -1,0 +1,71 @@
+OFFSET     NAME                TYPE            SIZE        SCOPE       INITFLAG    GLOBAL      PARAM       VALUE
+-----------------------------------------------------------------------------------------------------------------
+0          addtwo              PROCEDURE       0           0           1           0           0           0
+1          result              INTEGER         2           0           0           0           0           
+2          a                   INTEGER         2           0           0           0           0           
+3          b                   INTEGER         2           0           0           0           0           
+4          _0                  INTEGER         2           0           0           0           0           
+5          _1                  INTEGER         2           0           1           0           0           0
+6          main                PROCEDURE       0           6           1           0           0           2
+7          x                   INTEGER         2           6           0           0           0           
+8          _2                  INTEGER         2           6           1           0           0           3
+9          _3                  INTEGER         2           6           1           0           0           4
+10         _4                  STRING          8           6           1           0           0           "3 * 4 = "
+11         _5                  BYTE            1           6           1           0           0           1
+12         printstring.p0      BYTE            1           -1          0           1           0           
+13         printstring.p1      STRING          41          -1          0           1           0           ""
+14         printstring         PROCEDURE       0           -1          1           0           0           -1
+15         _6                  BYTE            1           6           1           0           0           1
+16         printinteger.p0     BYTE            1           -1          0           1           0           
+17         printinteger.p1     INTEGER         2           -1          0           1           0           
+18         printinteger        PROCEDURE       0           -1          1           0           0           -1
+19         _7                  BYTE            1           6           1           0           0           1
+20         printcr.p0          BYTE            1           -1          0           1           0           
+21         printcr             PROCEDURE       0           -1          1           0           0           -1
+22         _8                  INTEGER         2           0           1           0           0           5
+23         _9                  BOOLEAN         1           0           0           0           0           
+24         _10                 BOOLEAN         1           6           1           0           0           1
+25         _11                 STRING          26          6           1           0           0           "The result is less than 5!"
+26         _12                 BYTE            1           6           1           0           0           1
+27         _13                 BYTE            1           6           1           0           0           1
+28         _14                 LABEL           0           6           1           0           0           25
+29         _15                 STRING          41          6           1           0           0           "The result is greater than or equal to 5!"
+30         _16                 BYTE            1           6           1           0           0           1
+31         _17                 BYTE            1           6           1           0           0           1
+32         _18                 LABEL           0           6           1           0           0           30
+33         _19                 INTEGER         2           6           1           0           0           0
+-EOF
+ADDRESS              OPCODE       SRC1                 SRC2                 DST                 
+---------------------------------------------------------------------------------------
+0                    *            2                    3                    1                   
+1                    ret          0                    0                    0                   
+2                    cp           7                    0                    1                   
+3                    cp           8                    0                    2                   
+4                    cp           9                    0                    3                   
+5                    call         0                    0                    0                   
+6                    cp           1                    0                    7                   
+7                    cp           2                    0                    8                   
+8                    cp           3                    0                    9                   
+9                    cp           11                   0                    12                  
+10                   cp           10                   0                    13                  
+11                   call         0                    0                    14                  
+12                   cp           15                   0                    16                  
+13                   cp           7                    0                    17                  
+14                   call         0                    0                    18                  
+15                   cp           19                   0                    20                  
+16                   call         0                    0                    21                  
+17                   <            7                    22                   23                  
+18                   gt!=         23                   24                   28                  
+19                   cp           26                   0                    12                  
+20                   cp           25                   0                    13                  
+21                   call         0                    0                    14                  
+22                   cp           27                   0                    20                  
+23                   call         0                    0                    21                  
+24                   gt           0                    0                    32                  
+25                   cp           30                   0                    12                  
+26                   cp           29                   0                    13                  
+27                   call         0                    0                    14                  
+28                   cp           31                   0                    20                  
+29                   call         0                    0                    21                  
+30                   ret          0                    0                    0                   
+-EOF

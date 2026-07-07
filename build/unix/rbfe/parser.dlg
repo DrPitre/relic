@@ -1,0 +1,407 @@
+<<
+/* parser.dlg -- DLG Description of scanner
+ *
+ * Generated from: ../../../rb/fe/rb.g
+ *
+ * Terence Parr, Will Cohen, and Hank Dietz: 1989-2001
+ * Purdue University Electrical Engineering
+ * With AHPCRC, University of Minnesota
+ * ANTLR Version 1.33MR33
+ */
+
+#define ANTLR_VERSION	13333
+#include "tokens.h"
+#include "AToken.h"
+
+// any definitions that you need in the generated files
+#include "../../common/codegen.h"
+>>
+
+<<%%parserclass raginBasicParser>>
+
+
+%%START
+
+@
+	<<
+		return (ANTLRTokenType)1;
+	>>
+
+[\ \t]
+	<<
+    skip();  
+		return (ANTLRTokenType)2;
+	>>
+
+\n
+	<<
+    newline();  
+		return CR;
+	>>
+
+\(\* ~[\n@]* [\n@]
+	<<
+    skip(); newline();  
+		return COMMENT1;
+	>>
+
+(R|r)(E|e)(M|m) ~[\n@]* [\n@]
+	<<
+    skip(); newline();  
+		return COMMENT2;
+	>>
+
+DO
+	<<
+		return DO;
+	>>
+
+DIM
+	<<
+		return DIM;
+	>>
+
+ELSE
+	<<
+		return ELSE;
+	>>
+
+END
+	<<
+		return END;
+	>>
+
+ENDWHILE
+	<<
+		return ENDWHILE;
+	>>
+
+ENDIF
+	<<
+		return ENDIF;
+	>>
+
+PARAM
+	<<
+		return PARAM;
+	>>
+
+REM
+	<<
+		return REM;
+	>>
+
+TYPE
+	<<
+		return TYPE;
+	>>
+
+FOR
+	<<
+		return FOR;
+	>>
+
+TO
+	<<
+		return TO;
+	>>
+
+NEXT
+	<<
+		return NEXT;
+	>>
+
+STEP
+	<<
+		return STEP;
+	>>
+
+PROCEDURE
+	<<
+		return PROCEDURE;
+	>>
+
+PRINT
+	<<
+		return PRINT;
+	>>
+
+INPUT
+	<<
+		return INPUT;
+	>>
+
+GOTO
+	<<
+		return GOTO;
+	>>
+
+RUN
+	<<
+		return CALL;
+	>>
+
+IF
+	<<
+		return IF;
+	>>
+
+THEN
+	<<
+		return THEN;
+	>>
+
+WHILE
+	<<
+		return WHILE;
+	>>
+
+LOOP
+	<<
+		return LOOP;
+	>>
+
+AND
+	<<
+		return AND;
+	>>
+
+OR
+	<<
+		return OR;
+	>>
+
+FALSE
+	<<
+		return FALSE_;
+	>>
+
+INTEGER
+	<<
+		return INTEGER;
+	>>
+
+REAL
+	<<
+		return REAL;
+	>>
+
+LET
+	<<
+		return LET;
+	>>
+
+MOD
+	<<
+		return MOD;
+	>>
+
+NOT
+	<<
+		return NOT;
+	>>
+
+TRUE
+	<<
+		return TRUE_;
+	>>
+
+BOOLEAN
+	<<
+		return BOOLEAN;
+	>>
+
+STRING
+	<<
+		return STR;
+	>>
+
+BYTE
+	<<
+		return BYTE;
+	>>
+
+.
+	<<
+		return DOT;
+	>>
+
+#
+	<<
+		return POUND;
+	>>
+
+=
+	<<
+		return EQUALS;
+	>>
+
+:
+	<<
+		return COLON;
+	>>
+
+;
+	<<
+		return SEMI;
+	>>
+
+,
+	<<
+		return COMMA;
+	>>
+
+\[
+	<<
+		return LBRACKET;
+	>>
+
+\]
+	<<
+		return RBRACKET;
+	>>
+
+..
+	<<
+		return DOTDOT;
+	>>
+
+\(
+	<<
+		return LPAREN;
+	>>
+
+\)
+	<<
+		return RPAREN;
+	>>
+
+<>
+	<<
+		return NOT_EQUALS;
+	>>
+
+<
+	<<
+		return LT;
+	>>
+
+<=
+	<<
+		return LTE;
+	>>
+
+>
+	<<
+		return GT;
+	>>
+
+>=
+	<<
+		return GTE;
+	>>
+
+\+
+	<<
+		return PLUS;
+	>>
+
+\-
+	<<
+		return MINUS;
+	>>
+
+\*
+	<<
+		return TIMES;
+	>>
+
+/
+	<<
+		return DIV;
+	>>
+
+\$
+	<<
+		return DOLLAR;
+	>>
+
+\\
+	<<
+		return BSLASH;
+	>>
+
+[a-zA-Z] [a-zA-Z0-9_]*
+	<<
+		return IDENT;
+	>>
+
+[a-zA-Z] [a-zA-Z0-9_]* \$
+	<<
+		return IDENTSTR;
+	>>
+
+[0-9]+ { . } | \$[0-9A-Fa-f]+
+	<<
+		return INTLIT;
+	>>
+
+[0-9]+ { . [0-9]+ } {(e | E) { \+ | \- } [0-9]+}
+	<<
+		return REALLIT;
+	>>
+
+\' ~[] \'
+	<<
+		return CHARLIT;
+	>>
+
+\"
+	<<
+    // start STRINGLIT
+    skip();
+    mode(STRING);
+		return (ANTLRTokenType)67;
+	>>
+
+
+%%STRING
+
+@
+	<<
+		return (ANTLRTokenType)1;
+	>>
+
+\"\"
+	<<
+    
+    more();
+    replchar('\"');
+		return (ANTLRTokenType)68;
+	>>
+
+\n
+	<<
+    
+    replchar('\0');
+    newline();
+    mode(START);
+    /* error message */
+		return BADSTRING;
+	>>
+
+\"
+	<<
+    
+    replchar('\0');
+    mode(START);
+		return STRINGLIT;
+	>>
+
+~[]
+	<<
+    more();  
+		return (ANTLRTokenType)71;
+	>>
+
+%%

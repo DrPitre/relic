@@ -1,0 +1,21 @@
+OFFSET     NAME                TYPE            SIZE        SCOPE       INITFLAG    GLOBAL      PARAM       VALUE
+-----------------------------------------------------------------------------------------------------------------
+0          ledo                PROCEDURE       0           0           1           0           0           0
+1          ledo._0             STRING          33          0           1           0           0           "Hey Ledo, get off them drugs bro!"
+2          ledo._1             BYTE            1           0           1           0           0           1
+3          printstring.p0      BYTE            1           -1          0           1           0           
+4          printstring.p1      STRING          33          -1          0           1           0           ""
+5          printstring         PROCEDURE       0           -1          1           0           0           -1
+6          ledo._2             BYTE            1           0           1           0           0           1
+7          printcr.p0          BYTE            1           -1          0           1           0           
+8          printcr             PROCEDURE       0           -1          1           0           0           -1
+-EOF
+ADDRESS    OPCODE       SRC1         SRC2         DST         
+----------------------------------------------------------------
+0          cp           2            0            3           
+1          cp           1            0            4           
+2          call         0            0            5           
+3          cp           6            0            7           
+4          call         0            0            8           
+5          ret          0            0            0           
+-EOF

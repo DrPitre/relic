@@ -1,0 +1,4 @@
+#!/bin/tcsh
+genmk -CC -class raginBasicParser -project rbfe -pccts_path ../../../pccts ../../../rb/fe/rb.g > makefile
+echo "install:	rbfe" >> makefile
+echo "	cp rbfe $HOME/bin" >> makefile

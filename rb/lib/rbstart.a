@@ -1,0 +1,24 @@
+*
+* rbstart - RELIC/Ragin' Basic OS-9 program startup stub
+*
+* Linked as the entry point of every RELIC-compiled program. Transfers
+* control to the compiled program's MAIN procedure and terminates the
+* process via F$Exit when it returns.
+*
+
+            section __os9
+type        equ     1
+lang        equ     1
+attr        equ     $80
+rev         equ     0
+            endsect
+
+            section code
+F$Exit      equ     $06
+            import  main
+            export  _start
+_start
+            lbsr    main
+            clrb
+            os9     F$Exit
+            endsect

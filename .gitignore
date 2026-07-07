@@ -1,0 +1,19 @@
+.DS_Store
+*.o
+*.obj
+*.tmp
+.gdb_history
+/rb/lib/rbstart.r
+/build/unix/rblib/*.r
+
+# compiled tool binaries
+/relic/relic
+/pccts/bin/dlg
+/pccts/bin/antlr
+/pccts/bin/sor
+/pccts/bin/genmk
+/build/unix/rxopt/rxopt
+/build/unix/relic/relic
+/build/unix/be6809/be6309
+/build/unix/rxlist/rxlist
+/build/unix/rbfe/rbfe

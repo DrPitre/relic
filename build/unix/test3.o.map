@@ -1,0 +1,3 @@
+Symbol: bar (=/tmp/test3.o) = 0000
+Symbol: foo (=/tmp/test3.o) = 0000
+Symbol: start (=/tmp/test3.o) = 0002
