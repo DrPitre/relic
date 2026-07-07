@@ -1,3 +1,5 @@
+include ../rules.mak
+
 srcpath = ../../../rb/tests
 dsk = ../../../rbtest.dsk
 
@@ -6,7 +8,7 @@ vpath %.rb $(srcpath)
 OBJS = add age boolean calc divide for goto if math multiply print quick relation string subtract while
 
 %: %.rb
-	relic $< -L=/Users/boisy/relic -xr
+	relic $< -L=$(relicbase)/rb/lib/6309 -xr
 
 all: $(OBJS)
 
