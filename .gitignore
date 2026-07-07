@@ -10,6 +10,7 @@
 /rb/lib/*/librb.a
 /rb/lib/*/librb.zip
 /rb/lib/*/rbstart.o
+/emu/*.dsk
 
 # compiled tool binaries
 /relic/relic
